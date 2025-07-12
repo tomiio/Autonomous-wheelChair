@@ -1,0 +1,13 @@
+twist_mux:
+  ros__parameters:
+    topics:
+      - name: input_cmd_vel
+        topic: /cmd_vel
+        timeout:  0.5  # Timeout in seconds for this input
+        priority: 1   # Priority of this input
+
+    cmd_vel_out: /diff_cont/cmd_vel_unstamped  # Output topic
+    publish_limited: false  # Publish limited velocities if configured
+    velocity_hard_limit:  # Optional velocity limits
+      linear: 1.0  # Max linear velocity
+      angular: 0.7  # Max angular velocity

@@ -1,0 +1,37 @@
+# Motion Primitives File for Differential Drive Robot
+# modified by tomiio
+motion_primitives:
+  forward:
+    # Move forward for a specific time step at a constant velocity
+    duration: 2.0      # seconds (time for each step)
+    velocity: 0.5      # m/s (speed for forward movement)
+
+  backward:
+    # Move backward for a specific time step at a constant velocity
+    duration: 2.0      # seconds (time for each step)
+    velocity: -0.5     # m/s (negative for backward)
+
+  turn_left:
+    # Rotate left (counter-clockwise) for a specific angle at a fixed angular velocity
+    duration: 1.0      # seconds (time for each step)
+    angular_velocity: 1.0 # rad/s (angular speed for left rotation)
+
+  turn_right:
+    # Rotate right (clockwise) for a specific angle at a fixed angular velocity
+    duration: 1.0      # seconds (time for each step)
+    angular_velocity: -1.0 # rad/s (angular speed for right rotation)
+
+  # Optional: Reverse movement (if your robot can reverse in tight spaces)
+  reverse:
+    duration: 2.0      # seconds (time for each step)
+    velocity: -0.5     # m/s (negative for reverse)
+    allow_reverse_expansion: true  # Enable reverse movement for expansion (e.g., for tight spaces)
+  
+  # Optional: Small adjustments for navigation in tight spaces
+  fine_turn_left:
+    duration: 0.5      # seconds (fine adjustment turning time)
+    angular_velocity: 0.5 # rad/s
+
+  fine_turn_right:
+    duration: 0.5      # seconds (fine adjustment turning time)
+    angular_velocity: -0.5 # rad/s

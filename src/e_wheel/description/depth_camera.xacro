@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- RealSense D435i Camera Material (Optional) -->
+    <material name="camera_color">
+        <color rgba="0.2 0.2 0.2 1.0"/> <!-- Camera body color -->
+    </material>
+
+    <!-- RealSense D435i Camera Link -->
+    <link name="camera_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- Camera's position and orientation relative to the link -->
+            <geometry>
+                <box size="0.09 0.09 0.09"/> <!-- Approximate size of the camera -->
+            </geometry>
+            <material name="camera_color"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.09 0.09 0.09"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- Camera Joint (Fixed Joint from base_link) -->
+    <joint name="camera_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="camera_link"/>
+        <origin xyz="1 0 0.3" rpy="0 -${pi/18} 0"/> <!-- Camera is mounted 1.4m above base_link -->
+    </joint>
+
+    <!-- RealSense D435i Camera Sensor Plugin for Gazebo -->
+    <gazebo>
+        <sensor name="realsense_d435i_depth" type="depth">
+            <pose frame="base_link">0 0 1.4 0 0 0</pose>
+            <update_rate>30</update_rate>
+            <camera>
+                <horizontal_fov>1.5708</horizontal_fov> <!-- Horizontal FOV of the camera -->
+                <image width="640" height="480" format="R8G8B8" />
+                <depth>
+                    <image width="640" height="480" format="L_FLOAT32" />
+                    <min_distance>0.5</min_distance> <!-- Minimum depth distance -->
+                    <max_distance>10.0</max_distance> <!-- Maximum depth distance -->
+                </depth>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <frame_name>camera_link</frame_name>
+            </plugin>
+        </sensor>
+
+        <sensor name="realsense_d435i_rgb" type="camera">
+            <pose frame="base_link">0 0 1.4 0 0 0</pose>
+            <update_rate>30</update_rate>
+            <camera>
+                <horizontal_fov>1.5708</horizontal_fov> <!-- Horizontal FOV of the RGB camera -->
+                <image width="640" height="480" format="R8G8B8" />
+            </camera>
+        </sensor>
+    </gazebo>
+
+</robot>

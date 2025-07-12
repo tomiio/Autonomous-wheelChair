@@ -1,0 +1,10 @@
+# Ignore ROS 2 build files
+build/
+install/
+log/
+
+# Optional: OS or editor-specific
+*.swp
+*.bak
+*.pyc
+.DS_Store

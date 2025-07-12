@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+    <!-- Ultrasonic Sensor 1 -->
+    <link name="ultrasonic_left">
+        <sensor type="range" name="ultrasonic_left_sensor">
+            <pose>-0.15 0.23 0.28 0 0 0</pose> <!-- Adjust this to actual sensor position -->
+            <range>
+            <min_range>0.1</min_range>
+            <max_range>2.0</max_range>
+            </range>
+        </sensor>
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.1"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.1"/>
+            </geometry>
+        </collision>
+    </link>
+    <joint name="ultrasonic_1_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="ultrasonic_left"/>
+        <origin xyz="-0.15 0.23 0.28" rpy="0 0 3.14159"/>
+    </joint>
+
+    <!-- Ultrasonic Sensor 2 -->
+    <link name="ultrasonic_right">
+        <sensor type="range" name="ultrasonic_right_sensor">
+            <pose>-0.15 -0.23 0.28 0 0 0</pose> <!-- Adjust this to actual sensor position -->
+            <range>
+            <min_range>0.1</min_range>
+            <max_range>2.0</max_range>
+            </range>
+        </sensor>
+        <visual>
+            <geometry>
+                <cylinder radius="0.05" length="0.1"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.05" length="0.1"/>
+            </geometry>
+        </collision>
+    </link>
+    <joint name="ultrasonic_2_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="ultrasonic_right"/>
+        <origin xyz="-0.15 -0.23 0.28" rpy="0 0 3.14159"/>
+    </joint>
+
+    <!-- Additional robot links and joints here -->
+</robot>
